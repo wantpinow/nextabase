@@ -1,21 +1,37 @@
-# next-template
+# nextabase
 
-A Next.js 13 template for building apps with Radix UI and Tailwind CSS.
-
-## Usage
-
-```bash
-npx create-next-app -e https://github.com/shadcn/next-template
-```
+Next.js 13 + Supabase + shadcn/ui starter template
 
 ## Features
 
 - Next.js 13 App Directory
-- Radix UI Primitives
-- Tailwind CSS
-- Icons from [Lucide](https://lucide.dev)
-- Dark mode with `next-themes`
-- Tailwind CSS class sorting, merging and linting.
+- shadcn/ui for component styling
+
+## Usage
+
+```bash
+yarn
+yarn supabase start
+```
+
+```bash
+yarn supabase start
+yarn dev
+```
+
+## Todo List
+
+- [x] Add local development Supabase, with migrations folder
+- [ ] Add global Supabase user context
+- [ ] Style registration, login, and password reset pages
+- [ ] Add auth functionality to auth pages
+- [ ] Add user admin claims to Supabase migrations
+- [ ] Add user_metadata and app_metadata to Supabase User type
+- [ ] Add todo table with user_id foreign key
+- [ ] Add todo table RLS
+- [ ] Add dummy todo lists and users to seed.sql file
+- [ ] Add RLS for admins (view all todos)
+- [ ] Add ability for admins to set user claims
 
 ## License
 
