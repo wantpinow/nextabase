@@ -22,7 +22,8 @@ yarn dev
 ## Todo List
 
 - [x] Add local development Supabase, with migrations folder
-- [ ] Add global Supabase user context
+- [x] Add global Supabase user context
+- [ ] Add tailwind typography
 - [ ] Style registration, login, and password reset pages
 - [ ] Add auth functionality to auth pages
 - [ ] Add toast notifications for user interactions (incl darkmode)
