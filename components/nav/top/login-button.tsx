@@ -1,8 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { Session } from "@supabase/supabase-js"
 
+import { Session } from "@/types/supabase"
 import { useSupabaseAuth } from "@/hooks/supabase/use-auth"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/components/auth/auth-provider"

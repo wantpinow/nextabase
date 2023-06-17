@@ -27,8 +27,8 @@ yarn dev
 - [x] Style registration, login, and password reset pages
 - [x] Add auth functionality to auth pages
 - [x] Add toast notifications for user interactions (incl darkmode)
-- [ ] Add user admin claims to Supabase migrations
-- [ ] Add user_metadata and app_metadata to Supabase User type
+- [x] Add user admin claims to Supabase migrations
+- [x] Add user_metadata and app_metadata to Supabase User type
 - [ ] Add todo table with user_id foreign key
 - [ ] Add todo table RLS
 - [ ] Add todo page with CRUD operations
