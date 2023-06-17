@@ -22,7 +22,7 @@ const formSchema = z.object({
   password: z.string(),
 })
 
-export function LoginForm() {
+export function LoginForm({ redirectTo }: { redirectTo: string | null }) {
   const [loading, setLoading] = useState(false)
   const { signInWithPassword } = useSupabaseAuth()
 
@@ -39,7 +39,7 @@ export function LoginForm() {
     await signInWithPassword({
       email: values.email,
       password: values.password,
-      redirect: "/",
+      redirect: redirectTo ?? "/",
       doToast: true,
     })
     setLoading(false)

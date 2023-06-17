@@ -2,7 +2,15 @@ import Link from "next/link"
 
 import { LoginForm } from "@/components/auth/login-form"
 
-export default function SignInPage() {
+type SignInPageSearchParams = {
+  redirect_to: string | null
+}
+
+export default function SignInPage({
+  searchParams,
+}: {
+  searchParams: SignInPageSearchParams
+}) {
   return (
     <div>
       <div className="prose mx-auto mb-4 dark:prose-invert md:mb-12 md:max-w-[420px] md:border-b md:pb-4 md:text-center">
@@ -12,7 +20,7 @@ export default function SignInPage() {
         </p>
       </div>
       <div className="mx-auto md:max-w-[420px]">
-        <LoginForm />
+        <LoginForm redirectTo={searchParams.redirect_to} />
       </div>
     </div>
   )
