@@ -1,0 +1,2 @@
+-- users
+INSERT INTO auth.users VALUES ('00000000-0000-0000-0000-000000000000', '86d583b0-1cd4-40e9-9074-75d10797687c', 'authenticated', 'authenticated', 'admin@test.com', '$2a$10$226juE7ojOs1WK9qYlkftukOC9kl/X6EDtXErSfBAVm3lOqHSDIVu', '2023-01-26 20:57:04.700782+00', NULL, '', NULL, '', NULL, '', '', NULL, '2023-02-16 17:41:18.901835+00', '{"provider": "email", "providers": ["email"], "claims_admin": true}', '{}', NULL, '2023-01-26 20:57:04.697147+00', '2023-02-16 17:41:18.905585+00', NULL, NULL, '', '', NULL, DEFAULT, '', 0, NULL, '', NULL, false);
