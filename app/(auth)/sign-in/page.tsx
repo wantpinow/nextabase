@@ -1,20 +1,19 @@
 import Link from "next/link"
 
-// import { TypographyH3, TypographyMuted } from "@/components/ui/typography"
-// import { LoginForm } from "@/components/auth/login-form"
+import { LoginForm } from "@/components/auth/login-form"
 
 export default function SignInPage() {
   return (
     <div>
-      {/* <div className="md:text-center mb-6">
-        <TypographyH3>Sign in to your account</TypographyH3>
-        <TypographyMuted>
+      <div className="md:max-w-[420px] prose dark:prose-invert mx-auto md:text-center mb-4 md:border-b md:pb-4 md:mb-12">
+        <h2>Sign in to your account</h2>
+        <p>
           Don&apos;t have an account? <Link href="/sign-up">Sign Up</Link>
-        </TypographyMuted>
+        </p>
       </div>
-      <div className="lg:max-w-[380px] mx-auto">
+      <div className="md:max-w-[420px] mx-auto">
         <LoginForm />
-      </div> */}
+      </div>
     </div>
   )
 }

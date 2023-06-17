@@ -1,39 +1,26 @@
 "use client"
 
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { Session } from "@supabase/supabase-js"
 
-import supabase from "@/lib/supabase-browser"
+import { useSupabaseAuth } from "@/hooks/supabase/use-auth"
 import { Button } from "@/components/ui/button"
-import { useToast } from "@/components/ui/use-toast"
 import { useAuth } from "@/components/auth/auth-provider"
 
 export default function LoginButton({ session }: { session: Session | null }) {
   const { user, initial } = useAuth()
-  const { toast } = useToast()
-  const router = useRouter()
-
-  const signOut = async () => {
-    const { error } = await supabase.auth.signOut()
-    if (error) {
-      toast({
-        title: "Could not sign out",
-        description: error.message,
-        variant: "destructive",
-      })
-    } else {
-      toast({
-        title: "Goodbye",
-        description: "Signed out successfully",
-      })
-    }
-    // window.location.href = `${window.location.origin}`
-    router.push("/")
-  }
+  const { signOut } = useSupabaseAuth()
 
   const signOutElement = (
-    <Button variant="ghost" onClick={signOut}>
+    <Button
+      variant="ghost"
+      onClick={() =>
+        signOut({
+          redirect: "/",
+          doToast: true,
+        })
+      }
+    >
       Sign Out
     </Button>
   )
