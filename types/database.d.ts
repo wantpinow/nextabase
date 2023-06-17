@@ -34,19 +34,102 @@ export interface Database {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      todo: {
+        Row: {
+          complete: boolean
+          created_at: string
+          id: string
+          name: string
+          public: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          complete?: boolean
+          created_at?: string
+          id?: string
+          name: string
+          public?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          complete?: boolean
+          created_at?: string
+          id?: string
+          name?: string
+          public?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "todo_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      delete_claim: {
+        Args: {
+          uid: string
+          claim: string
+        }
+        Returns: string
+      }
+      get_claim: {
+        Args: {
+          uid: string
+          claim: string
+        }
+        Returns: Json
+      }
+      get_claims: {
+        Args: {
+          uid: string
+        }
+        Returns: Json
+      }
+      get_my_claim: {
+        Args: {
+          claim: string
+        }
+        Returns: Json
+      }
+      get_my_claims: {
+        Args: Record<PropertyKey, never>
+        Returns: Json
+      }
+      is_claims_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      set_claim: {
+        Args: {
+          uid: string
+          claim: string
+          value: Json
+        }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
     }
     CompositeTypes: {
-      [_ in never]: never
+      auth_user: {
+        id: string
+        email: string
+        last_sign_in_at: string
+        raw_user_meta_data: Json
+        raw_app_meta_data: Json
+      }
     }
   }
   storage: {
@@ -235,3 +318,4 @@ export interface Database {
     }
   }
 }
+

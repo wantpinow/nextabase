@@ -37,3 +37,6 @@ interface DatabaseOverride {
   }
 }
 export interface Database extends ModifyDeep<_Database, DatabaseOverride> {}
+
+// export database types
+export type Todo = Database["public"]["Tables"]["todo"]["Row"]

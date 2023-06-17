@@ -43,7 +43,7 @@ export function useSupabaseAuth() {
     if (doToast) {
       toast({
         title: "Welcome!",
-        description: "Registered successfully",
+        description: "Signed in successfully",
       })
     }
     if (redirect) router.push(redirect)
@@ -116,6 +116,7 @@ export function useSupabaseAuth() {
         description: "See you soon!",
       })
     }
+    if (redirect) router.push(redirect)
     return true
   }
 

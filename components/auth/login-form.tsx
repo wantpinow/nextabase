@@ -39,7 +39,7 @@ export function LoginForm({ redirectTo }: { redirectTo: string | null }) {
     await signInWithPassword({
       email: values.email,
       password: values.password,
-      redirect: redirectTo ?? "/",
+      redirect: redirectTo ?? "/dashboard",
       doToast: true,
     })
     setLoading(false)
