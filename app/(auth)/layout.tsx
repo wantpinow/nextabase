@@ -20,7 +20,7 @@ export default function AuthLayout({
             alt="Authentication"
             className="object-cover w-full h-full border-b md:border-b-0"
           />
-          <div className="absolute bottom-0 md:top-0  p-4">
+          <div className="absolute bottom-0 md:top-0 p-4 text-white">
             <Link href="/">
               <div className="relative z-20 flex items-center font-bold">
                 <Icons.logo className="mr-2 h-6 w-6" /> {siteConfig.name}
