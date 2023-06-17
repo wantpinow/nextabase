@@ -5,7 +5,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio"
 export default async function IndexPage() {
   return (
     <>
-      <div className="prose dark:prose-invert lg:prose-xl mb-4">
+      <div className="prose mb-4 dark:prose-invert lg:prose-xl">
         <h1>Nextabase</h1>
       </div>
       <AspectRatio ratio={16 / 6} className="mb-4">

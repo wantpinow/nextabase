@@ -67,7 +67,6 @@ export const AuthProvider = (props: AuthProviderProps) => {
       setSession(currentSession)
       setUser(currentSession?.user ?? null)
 
-      console.log("event", event)
       switch (event) {
         case EVENTS.PASSWORD_RECOVERY:
           setView(VIEWS.UPDATE_PASSWORD)
@@ -83,7 +82,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
     return () => {
       authListener?.unsubscribe()
     }
-  }, [])
+  }, [accessToken, router])
 
   const value = useMemo(() => {
     return {
