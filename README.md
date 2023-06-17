@@ -25,6 +25,7 @@ yarn dev
 - [ ] Add global Supabase user context
 - [ ] Style registration, login, and password reset pages
 - [ ] Add auth functionality to auth pages
+- [ ] Add toast notifications for user interactions (incl darkmode)
 - [ ] Add user admin claims to Supabase migrations
 - [ ] Add user_metadata and app_metadata to Supabase User type
 - [ ] Add todo table with user_id foreign key
