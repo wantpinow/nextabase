@@ -38,4 +38,4 @@ yarn dev
 
 ## License
 
-Licensed under the [MIT license](https://github.com/shadcn/ui/blob/main/LICENSE.md).
+Licensed under the [Apache 2.0 license](http://www.apache.org/licenses/).
