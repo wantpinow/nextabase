@@ -1,6 +1,9 @@
 import { createClient, fetchServerSession } from "@/lib/supabase-server"
-import NewTododCard from "@/components/todos/new-card"
-import TodoCard from "@/components/todos/todo-card"
+import TodoCard from "@/components/todos/card"
+import EditTodo from "@/components/todos/edit"
+import EditableTodos from "@/components/todos/editable-todos"
+import NewTodo from "@/components/todos/new"
+import StaticTodos from "@/components/todos/static-todos"
 
 export default async function DashboardPage() {
   // get current user
@@ -14,9 +17,11 @@ export default async function DashboardPage() {
     .from("todo")
     .select("*")
 
-  // get current user's todos and other users' todos
-  const usersTodos = todos?.filter((todo) => todo.user_id === user.id) ?? []
-  const othersTodos = todos?.filter((todo) => todo.user_id !== user.id) ?? []
+  // get all todos for current user
+  const userTodos = todos?.filter((todo) => todo.user_id === user.id) ?? []
+
+  // get all todos for other users
+  const otherTodos = todos?.filter((todo) => todo.user_id !== user.id) ?? []
 
   return (
     <div>
@@ -29,15 +34,9 @@ export default async function DashboardPage() {
           consectetur facere cupiditate ipsum voluptas!
         </p>
       </section>
-      <section className="mb-4">
-        <p className=" text-right">Your Todos</p>
-        <div className="grid grid-cols-1 md:grid-cols-4">
-          <NewTododCard />
-          {usersTodos.map((todo) => (
-            <TodoCard key={todo.id} todo={todo} />
-          ))}
-        </div>
-      </section>
+      <EditableTodos todos={userTodos} />
+
+      {otherTodos.length > 0 ? <StaticTodos todos={otherTodos} /> : null}
     </div>
   )
 }
