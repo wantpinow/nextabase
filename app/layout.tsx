@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase-server"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from "@/components/auth/auth-provider"
+import PHProvider from "@/components/misc/posthog"
 import { TailwindIndicator } from "@/components/theme/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme/theme-provider"
 
@@ -48,13 +49,15 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           fontSans.variable
         )}
       >
-        <AuthProvider accessToken={accessToken}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            {children}
-            <TailwindIndicator />
-            <Toaster />
-          </ThemeProvider>
-        </AuthProvider>
+        <PHProvider>
+          <AuthProvider accessToken={accessToken}>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              {children}
+              <TailwindIndicator />
+              <Toaster />
+            </ThemeProvider>
+          </AuthProvider>
+        </PHProvider>
       </body>
     </html>
   )

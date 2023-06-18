@@ -2,32 +2,16 @@
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import { useRouter } from "next/navigation"
+import { usePostHog } from "posthog-js/react"
 
 import { Session, User } from "@/types/supabase"
 import supabase from "@/lib/supabase-browser"
-
-export const EVENTS = {
-  PASSWORD_RECOVERY: "PASSWORD_RECOVERY",
-  SIGNED_OUT: "SIGNED_OUT",
-  USER_UPDATED: "USER_UPDATED",
-}
-
-export const VIEWS = {
-  SIGN_IN: "sign_in",
-  SIGN_UP: "sign_up",
-  FORGOTTEN_PASSWORD: "forgotten_password",
-  MAGIC_LINK: "magic_link",
-  UPDATE_PASSWORD: "update_password",
-}
 
 export const AuthContext = createContext<
   | {
       initial: boolean
       session: Session | null
       user: User | null
-      view: string
-      setView: (view: string) => void
-      signOut: () => void
     }
   | undefined
 >(undefined)
@@ -42,11 +26,11 @@ export const AuthProvider = (props: AuthProviderProps) => {
   const [initial, setInitial] = useState(true)
   const [session, setSession] = useState<Session | null>(null)
   const [user, setUser] = useState<User | null>(null)
-  const [view, setView] = useState(VIEWS.SIGN_IN)
   const router = useRouter()
   const { accessToken, ...rest } = props
 
   useEffect(() => {
+    // get the latest session from supabase
     async function getActiveSession() {
       const {
         data: { session: activeSession },
@@ -57,6 +41,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
     }
     getActiveSession()
 
+    // listen for changes to auth status
     const {
       data: { subscription: authListener },
     } = supabase.auth.onAuthStateChange((event, currentSession) => {
@@ -64,19 +49,9 @@ export const AuthProvider = (props: AuthProviderProps) => {
         router.refresh()
       }
 
+      // update session and user in state
       setSession(currentSession)
       setUser(currentSession?.user ?? null)
-
-      switch (event) {
-        case EVENTS.PASSWORD_RECOVERY:
-          setView(VIEWS.UPDATE_PASSWORD)
-          break
-        case EVENTS.SIGNED_OUT:
-        case EVENTS.USER_UPDATED:
-          setView(VIEWS.SIGN_IN)
-          break
-        default:
-      }
     })
 
     return () => {
@@ -84,16 +59,14 @@ export const AuthProvider = (props: AuthProviderProps) => {
     }
   }, [accessToken, router])
 
+  // memoize the context value to update only when needed
   const value = useMemo(() => {
     return {
       initial,
       session,
       user,
-      view,
-      setView,
-      signOut: () => supabase.auth.signOut(),
     }
-  }, [initial, session, user, view])
+  }, [initial, session, user])
 
   return <AuthContext.Provider value={value} {...rest} />
 }

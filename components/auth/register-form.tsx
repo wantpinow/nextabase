@@ -47,7 +47,7 @@ export function RegisterForm() {
       email: values.email,
       password: values.password,
       redirect: "/sign-up/success",
-      doToast: false,
+      doToast: true,
     })
     setLoading(false)
   }

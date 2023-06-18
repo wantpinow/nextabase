@@ -35,6 +35,7 @@ yarn dev
 - [ ] Add dummy todo lists and users to seed.sql file
 - [ ] Add RLS for admins (view all todos)
 - [ ] Add ability for admins to set user claims
+- [x] Add tracking with Posthog
 
 ## License
 

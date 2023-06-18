@@ -1,13 +1,16 @@
 import { useRouter } from "next/navigation"
 
 import supabase from "@/lib/supabase-browser"
-
-import { useToast } from "../../components/ui/use-toast"
+import usePosthog from "@/hooks/use-posthog"
+import { useToast } from "@/components/ui/use-toast"
+import { useAuth } from "@/components/auth/auth-provider"
 
 export function useSupabaseAuth() {
   // get required hooks
   const { toast } = useToast()
   const router = useRouter()
+  const { user } = useAuth()
+  const { capture, identify, reset } = usePosthog()
 
   // sign in function
   async function signInWithPassword({
@@ -39,6 +42,11 @@ export function useSupabaseAuth() {
       return false
     }
 
+    // get the updated session
+    const {
+      data: { session: currentSession },
+    } = await supabase.auth.getSession()
+
     // handle success
     if (doToast) {
       toast({
@@ -46,6 +54,16 @@ export function useSupabaseAuth() {
         description: "Signed in successfully",
       })
     }
+    if (currentSession?.user) {
+      capture("SIGN_IN", {
+        email: currentSession.user.email,
+      })
+      identify(currentSession.user.id, {
+        email: currentSession.user.email,
+      })
+    }
+
+    // redirect if necessary
     if (redirect) router.push(redirect)
     return true
   }
@@ -83,10 +101,15 @@ export function useSupabaseAuth() {
     // handle success
     if (doToast) {
       toast({
-        title: "Welcome!",
-        description: "Email invite sent",
+        title: "Email invite sent",
+        description: "Check your inbox for a link to sign in",
       })
     }
+    capture("SIGN_UP", {
+      email: email,
+    })
+
+    // redirect if necessary
     if (redirect) router.push(redirect)
     return true
   }
@@ -99,7 +122,10 @@ export function useSupabaseAuth() {
     redirect: string | null
     doToast: boolean
   }) => {
+    // attempt to sign out
     const { error } = await supabase.auth.signOut()
+
+    // handle errors
     if (error) {
       if (doToast) {
         toast({
@@ -110,12 +136,22 @@ export function useSupabaseAuth() {
       }
       return false
     }
+
+    // handle success
     if (doToast) {
       toast({
         title: "Signed out",
         description: "See you soon!",
       })
     }
+    if (user) {
+      capture("SIGN_OUT", {
+        email: user.email,
+      })
+      reset()
+    }
+
+    // redirect if necessary
     if (redirect) router.push(redirect)
     return true
   }
