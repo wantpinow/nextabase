@@ -29,11 +29,11 @@ yarn dev
 - [x] Add toast notifications for user interactions (incl darkmode)
 - [x] Add user admin claims to Supabase migrations
 - [x] Add user_metadata and app_metadata to Supabase User type
-- [ ] Add todo table with user_id foreign key
-- [ ] Add todo table RLS
-- [ ] Add todo page with CRUD operations
+- [x] Add todo table with user_id foreign key
+- [x] Add todo table RLS
+- [x] Add todo page with CRUD operations
 - [ ] Add dummy todo lists and users to seed.sql file
-- [ ] Add RLS for admins (view all todos)
+- [x] Add RLS for admins (view all todos)
 - [ ] Add ability for admins to set user claims
 - [x] Add tracking with Posthog
 

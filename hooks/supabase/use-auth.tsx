@@ -1,5 +1,6 @@
 import { useRouter } from "next/navigation"
 
+import { siteConfig } from "@/config/site"
 import supabase from "@/lib/supabase-browser"
 import usePosthog from "@/hooks/use-posthog"
 import { useToast } from "@/components/ui/use-toast"
@@ -81,9 +82,14 @@ export function useSupabaseAuth() {
     doToast: boolean
   }) {
     // attempt to sign up
+    const emailRedirectTo =
+      window.location.origin + siteConfig.signUpRedirectPath
     const { error } = await supabase.auth.signUp({
       email: email,
       password: password,
+      options: {
+        emailRedirectTo,
+      },
     })
 
     // handle errors
