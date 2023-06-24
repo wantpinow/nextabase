@@ -15,8 +15,8 @@ export default function EditableTodos({
 
   return (
     <section className="mb-4">
-      <h1 className="text-right text-xl font-semibold mb-2">Your Todos</h1>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
+      <h1 className="mb-2 text-right text-xl font-semibold">Your Todos</h1>
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-4">
         <NewTodo setTodos={setTodos} />
         {todos.map((todo) => (
           <EditTodo key={todo.id} todo={todo} setTodos={setTodos} />
