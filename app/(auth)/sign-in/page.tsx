@@ -1,9 +1,14 @@
+import { Metadata } from "next"
 import Link from "next/link"
 
 import { LoginForm } from "@/components/auth/login-form"
 
 type SignInPageSearchParams = {
   redirect_to: string | null
+}
+
+export const metadata: Metadata = {
+  title: "Sign In",
 }
 
 export default function SignInPage({

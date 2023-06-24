@@ -1,9 +1,15 @@
+import { Metadata } from "next"
+
 import { createClient, fetchServerSession } from "@/lib/supabase-server"
 import TodoCard from "@/components/todos/card"
 import EditTodo from "@/components/todos/edit"
 import EditableTodos from "@/components/todos/editable-todos"
 import NewTodo from "@/components/todos/new"
 import StaticTodos from "@/components/todos/static-todos"
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+}
 
 export default async function DashboardPage() {
   // get current user

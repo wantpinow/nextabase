@@ -1,3 +1,9 @@
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Account Registered!",
+}
+
 export default function SignUpSuccessPage() {
   return (
     <div>
